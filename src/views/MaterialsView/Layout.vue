@@ -28,7 +28,33 @@ const currentCom = computed(() => store.coms[store.currentMaterialCom]);
 const updateStatus: UpdateStatus = (configKey, payload) => {
   switch (configKey) {
     case 'title':
-      store.setTextStatus(currentCom.value.status[configKey as 'title'], payload as string);
+    case 'desc':
+    case 'titleColor':
+    case 'descColor':
+      store.setTextStatus(
+        currentCom.value.status[configKey as 'title' | 'desc' | 'titleColor' | 'descColor'],
+        payload as string,
+      );
+      break;
+    case 'options':
+      store.setStringArrStatus(
+        currentCom.value.status[configKey as 'options'],
+        payload as number | undefined,
+      );
+      break;
+    case 'position':
+      store.setPosition(currentCom.value.status[configKey as 'position'], payload as number);
+      break;
+    case 'titleSize':
+    case 'descSize':
+    case 'titleWeight':
+    case 'descWeight':
+      store.setCurrentStatus(
+        currentCom.value.status[
+          configKey as 'titleSize' | 'descSize' | 'descWeight' | 'descWeight'
+        ],
+        payload as number,
+      );
       break;
   }
 };
@@ -49,5 +75,6 @@ provide('updateStatus', updateStatus);
 .aside-right {
   border-left: 1px solid var(--border-color);
   padding: 20px;
+  width: 350px;
 }
 </style>

@@ -1,4 +1,4 @@
-import type { TextProps } from './editProps';
+import type { OptionsProps, TextProps } from './editProps';
 import type { ComStatus } from './common';
 // 题目类型
 export type SurveyComName =
@@ -12,6 +12,9 @@ export type Material = SurveyComName | 'text-note';
 
 export interface Actions {
   setTextStatus: (textProps: TextProps, text: string) => void;
+  setStringArrStatus: (optionProps: OptionsProps, index?: number) => void;
+  setPosition: (optionProps: OptionsProps, index: number) => void;
+  setCurrentStatus: (optionProps: OptionsProps, index: number) => void;
 }
 
 export interface MaterialStore extends Actions {

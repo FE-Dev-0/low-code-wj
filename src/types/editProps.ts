@@ -12,11 +12,11 @@ export interface TextProps extends BaseProps {
   status: string;
 }
 
-export type StringStatusArr = string[];
-export type ValueStatusArr = Array<{ value: string; label: string }>;
+export type OptionItemType = string | { value: string; label: string };
+export type OptionsStatusArr = OptionItemType[];
 
 export interface OptionsProps extends BaseProps {
-  status: StringStatusArr | ValueStatusArr;
+  status: OptionsStatusArr;
   currentStatus: number;
 }
 

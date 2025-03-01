@@ -1,5 +1,5 @@
 <template>
-  <div v-for="(item, key) in com.status" :key="item.id">
+  <div v-for="(item, key) in com.status" :key="item.id" class="mb-20">
     <component v-if="item.isShow" :is="item.editCom" :config-key="key" v-bind="item"></component>
   </div>
 </template>

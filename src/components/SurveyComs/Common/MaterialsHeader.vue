@@ -2,17 +2,65 @@
   <div>
     <div class="container mb-15">
       <!-- 标题 -->
-      <h2 class="title font-weight-100">{{ title }}</h2>
+      <h2
+        class="title font-weight-100"
+        :style="{
+          fontSize: `${titleSize}px`,
+          color: titleColor,
+        }"
+      >
+        <span :class="{ 'font-bold': !titleWeight, 'font-italic': titleItalic }">{{ title }}</span>
+      </h2>
       <!-- 描述 -->
-      <div class="desc">{{ desc }}</div>
+      <div class="desc" :style="{ fontSize: `${descSize}px`, color: descColor }">
+        <span :class="{ 'font-bold': !descWeight, 'font-italic': descItalic }">{{ desc }}</span>
+      </div>
     </div>
   </div>
 </template>
 
 <script setup lang="ts">
-withDefaults(defineProps<{ title: string; desc: string }>(), {
-  title: '',
-  desc: '',
+defineProps({
+  title: {
+    type: String,
+    default: '',
+  },
+  desc: {
+    type: String,
+    default: '',
+  },
+  titleSize: {
+    type: String,
+    default: '22',
+  },
+  descSize: {
+    type: String,
+    default: '16',
+  },
+  descWeight: {
+    type: Number,
+    default: 0,
+  },
+  titleWeight: {
+    type: Number,
+    default: 0,
+  },
+  descItalic: {
+    type: Number,
+    default: 0,
+  },
+  titleItalic: {
+    type: Number,
+    default: 0,
+  },
+  titleColor: {
+    type: String,
+    default: '#000',
+  },
+  descColor: {
+    type: String,
+    default: '#909399',
+  },
 });
 </script>
 
