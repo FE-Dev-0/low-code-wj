@@ -6,13 +6,15 @@
         <el-button :icon="ArrowLeft" circle size="small" @click="goHome" />
       </div>
       <div class="center flex align-items-center space-between pl-15 pr-15">
-        <span v-if="props.id">
-          <ElButton size="small" type="primary" @click="updateSurvey">更新问卷</ElButton>
-        </span>
-        <span v-else>
-          <ElButton size="small" type="danger" @click="reset">重置问卷</ElButton>
-          <ElButton size="small" type="success" @click="saveSurvey">保存问卷</ElButton>
-        </span>
+        <div v-if="isEditor">
+          <span v-if="id">
+            <ElButton size="small" type="primary" @click="updateSurvey">更新问卷</ElButton>
+          </span>
+          <span v-else>
+            <ElButton size="small" type="danger" @click="reset">重置问卷</ElButton>
+            <ElButton size="small" type="success" @click="saveSurvey">保存问卷</ElButton>
+          </span>
+        </div>
       </div>
       <div class="right flex justify-content-center align-items-center">
         <el-avatar :size="30" :src="avatar" />

@@ -1,5 +1,5 @@
 <template>
-  <Header :id="id"></Header>
+  <Header :id="id" :is-editor="true"></Header>
   <div class="editor-container">
     <ElContainer style="height: 100%">
       <ElAside style="width: 350px">
