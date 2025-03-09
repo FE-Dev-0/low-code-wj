@@ -1,6 +1,6 @@
-import { defaultStatusMap } from '@/configs/defaultStatus/defaultStatusMap';
 import { defineStore } from 'pinia';
-import { setTextStatus, setStringArrStatus, setPosition, setCurrentStatus } from './actions';
+import { setTextStatus, setStringArrStatus, setCurrentStatus } from './actions';
+import { defaultStatusMap } from '@/configs/defaultStatus/defaultStatusMap';
 export const useMaterialStore = defineStore('materilaStore', {
   state: () => ({
     // 当前选择的组件
@@ -8,12 +8,15 @@ export const useMaterialStore = defineStore('materilaStore', {
     // 记录所有的业务组件
     coms: {
       'single-select': defaultStatusMap['single-select'](),
+      'text-note': defaultStatusMap['text-note'](),
     },
   }),
   actions: {
     setTextStatus,
     setStringArrStatus,
-    setPosition,
     setCurrentStatus,
+    setCurrentMaterialCom(comName: string) {
+      this.currentMaterialCom = comName;
+    },
   },
 });

@@ -26,6 +26,8 @@
 <script setup lang="ts">
 import { Plus, Compass } from '@element-plus/icons-vue';
 import { ref } from 'vue';
+import { getCurrentStatus } from '@/utils';
+console.log(getCurrentStatus);
 // 路由
 import { useRouter } from 'vue-router';
 const router = useRouter();
@@ -33,7 +35,7 @@ const router = useRouter();
 const tableData = ref([]);
 
 const goToEditor = () => {
-  router.push('/editor');
+  router.push('/editor/survey-type');
 };
 
 const goToComMarket = () => {

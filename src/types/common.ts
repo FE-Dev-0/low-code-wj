@@ -1,12 +1,15 @@
 import { defineComponent } from 'vue';
-import type { OptionsStatus } from './editProps';
+import type { OptionsProps, TextProps } from './editProps';
+import type { Material } from './store';
 
 // 导出 vue 组件类型
 export type VueComType = ReturnType<typeof defineComponent>;
 
 export interface ComStatus {
   type: VueComType;
-  name: string;
+  name: Material;
   id: string;
-  status: OptionsStatus;
+  status: {
+    [key: string]: TextProps | OptionsProps;
+  };
 }

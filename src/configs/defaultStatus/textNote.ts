@@ -1,12 +1,7 @@
-// 单选题的 JSON-Schema 配置
-// 单选题（业务组件） ---> 编辑组件有哪些
-
-// 业务组件
-import SingleSelect from '@/components/SurveyComs/Materials/SelectComs/SingleSelect.vue';
-// 编辑组件
+import TextTypeEditor from '@/components/SurveyComs/EditItems/TextTypeEditor.vue';
+import TextNote from '@/components/SurveyComs/Materials/NoteComs/TextNote.vue';
 import TitleEditor from '@/components/SurveyComs/EditItems/TitleEditor.vue';
 import DescEditor from '@/components/SurveyComs/EditItems/DescEditor.vue';
-import OptionsEditor from '@/components/SurveyComs/EditItems/OptionsEditor.vue';
 import PositionEditor from '@/components/SurveyComs/EditItems/PositionEditor.vue';
 import SizeEditor from '@/components/SurveyComs/EditItems/SizeEditor.vue';
 import WeightEditor from '@/components/SurveyComs/EditItems/WeightEditor.vue';
@@ -14,14 +9,22 @@ import ItalicEditor from '@/components/SurveyComs/EditItems/ItalicEditor.vue';
 import ColorEditor from '@/components/SurveyComs/EditItems/ColorEditor.vue';
 import { markRaw } from 'vue';
 import { v4 as uuidv4 } from 'uuid';
-
-export default function () {
+import { changeEditorIsShowStatus } from '@/utils';
+import { setCurrentStatus, setTextStatus } from '@/stores/actions';
+export default function getStatus() {
   return {
-    type: markRaw(SingleSelect),
-    name: 'single-select',
     id: uuidv4(),
-    // 组件的状态：组件的每一个能够修改的状态都应该对应一个编辑组件
+    type: markRaw(TextNote),
+    name: 'text-note',
     status: {
+      type: {
+        id: uuidv4(),
+        editCom: markRaw(TextTypeEditor),
+        status: ['标题', '描述'],
+        name: 'text-type-editor',
+        currentStatus: 0,
+        isShow: true,
+      },
       title: {
         id: uuidv4(),
         status: '单选题默认标题',
@@ -32,23 +35,15 @@ export default function () {
       desc: {
         id: uuidv4(),
         status: '单选题默认描述',
-        isShow: true,
+        isShow: false,
         name: 'desc-editor',
         editCom: markRaw(DescEditor),
-      },
-      options: {
-        id: uuidv4(),
-        status: ['默认选项1', '默认选项2'],
-        currentStatus: 0,
-        isShow: true,
-        name: 'options-editor',
-        editCom: markRaw(OptionsEditor),
       },
       position: {
         id: uuidv4(),
         currentStatus: 0,
         status: ['左对齐', '居中对齐', '右对齐'],
-        isShow: true,
+        isShow: false,
         name: 'position-editor',
         editCom: markRaw(PositionEditor),
       },
@@ -64,7 +59,7 @@ export default function () {
         id: uuidv4(),
         currentStatus: 0,
         status: ['16', '14', '12'],
-        isShow: true,
+        isShow: false,
         name: 'size-editor',
         editCom: markRaw(SizeEditor),
       },
@@ -80,7 +75,7 @@ export default function () {
         id: uuidv4(),
         currentStatus: 1,
         status: ['加粗', '正常'],
-        isShow: true,
+        isShow: false,
         name: 'weight-editor',
         editCom: markRaw(WeightEditor),
       },
@@ -96,7 +91,7 @@ export default function () {
         id: uuidv4(),
         currentStatus: 0,
         status: ['正常', '斜体'],
-        isShow: true,
+        isShow: false,
         name: 'italic-editor',
         editCom: markRaw(ItalicEditor),
       },
@@ -110,10 +105,26 @@ export default function () {
       descColor: {
         id: uuidv4(),
         status: '#909399',
-        isShow: true,
+        isShow: false,
         name: 'color-editor',
         editCom: markRaw(ColorEditor),
       },
     },
   };
 }
+
+export const getTitleDefaultStatus = () => {
+  return getStatus();
+};
+
+export const getParagraphDefaultStatus = () => {
+  const status = getStatus();
+  const typeStatus = status.status;
+  const desc =
+    '为了给您提供更好的服务，希望您能抽出几分钟时间，将您的感受和建议告诉我们，我们非常重视每位用户的宝贵意见，期待您的参与！现在我们就马上开始吧！';
+  setTextStatus(typeStatus.desc, desc);
+  setCurrentStatus(typeStatus.type, 1);
+
+  changeEditorIsShowStatus(typeStatus, 1);
+  return status;
+};

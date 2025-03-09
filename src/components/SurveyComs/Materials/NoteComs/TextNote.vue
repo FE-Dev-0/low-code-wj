@@ -1,47 +1,49 @@
 <template>
-  <div :style="{ 'text-align': getItemAlign(computedState.position) }">
-    <MaterialsHeader
-      :desc="computedState.desc"
-      :title="computedState.title"
-      :title-size="computedState.titleSize"
-      :desc-size="computedState.descSize"
-      :desc-weight="computedState.descWeight"
-      :title-weight="computedState.titleWeight"
-      :title-color="computedState.titleColor"
-      :desc-color="computedState.descColor"
-    />
-    <div class="radio-group">
-      <ElRadioGroup>
-        <ElRadio v-for="(item, index) in computedState.options" :value="item" :key="index">{{
-          item
-        }}</ElRadio>
-      </ElRadioGroup>
-    </div>
-  </div>
+  <h1
+    v-if="computedState.type === 0"
+    class="pt-10 pb-10 text-center font-weight-200"
+    :class="{
+      'font-italic': computedState.titleItalic,
+      'font-bold': !computedState.titleWeight,
+    }"
+    :style="{
+      fontSize: computedState.titleSize + 'px',
+      color: computedState.titleColor,
+    }"
+  >
+    {{ computedState.title }}
+  </h1>
+  <p
+    v-else
+    :class="{
+      'font-italic': computedState.descItalic,
+      'font-bold': !computedState.descWeight,
+    }"
+    :style="{
+      textAlign: getItemAlign(computedState.position),
+      fontSize: computedState.descSize + 'px',
+      color: computedState.descColor,
+    }"
+  >
+    {{ computedState.desc }}
+  </p>
 </template>
 
 <script setup lang="ts">
-import MaterialsHeader from '@/components/SurveyComs/Common/MaterialsHeader.vue';
-import type { OptionsStatus } from '@/types';
-import {
-  getCurrentStatus,
-  getStringStatus,
-  getStringStatusByCurrentStatus,
-  getTextStatus,
-} from '@/utils';
-import { ElRadio, ElRadioGroup } from 'element-plus';
+import type { TypeStatus } from '@/types';
+import { getCurrentStatus, getStringStatusByCurrentStatus, getTextStatus } from '@/utils';
 import { computed } from 'vue';
-
 const props = defineProps<{
-  status: OptionsStatus;
+  status: TypeStatus;
   serialNum: number;
 }>();
 
 const computedState = computed(() => {
+  console.log(props);
   return {
     title: getTextStatus(props.status.title),
     desc: getTextStatus(props.status.desc),
-    options: getStringStatus(props.status.options),
+    type: getCurrentStatus(props.status.type),
     position: getCurrentStatus(props.status.position),
     descWeight: getCurrentStatus(props.status.descWeight),
     titleWeight: getCurrentStatus(props.status.titleWeight),

@@ -11,9 +11,9 @@ export interface BaseProps {
 export interface TextProps extends BaseProps {
   status: string;
 }
-
-export type OptionItemType = string | { value: string; label: string };
-export type OptionsStatusArr = OptionItemType[];
+export type StringStatusArr = string[];
+export type ValueStatusArr = Array<{ value: string; label: string }>;
+export type OptionsStatusArr = StringStatusArr | ValueStatusArr;
 
 export interface OptionsProps extends BaseProps {
   status: OptionsStatusArr;
@@ -38,6 +38,10 @@ export interface BaseStatus {
 // 因为不是所有业务组件都有options这个选项、所以需要分开定义
 export interface OptionsStatus extends BaseStatus {
   options: OptionsProps;
+}
+
+export interface TypeStatus extends BaseStatus {
+  type: OptionsProps;
 }
 
 export type UpdateStatus = (configKey: string, payload?: number | string | boolean) => void;
