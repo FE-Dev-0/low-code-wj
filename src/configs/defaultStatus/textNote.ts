@@ -125,6 +125,6 @@ export const getParagraphDefaultStatus = () => {
   setTextStatus(typeStatus.desc, desc);
   setCurrentStatus(typeStatus.type, 1);
 
-  changeEditorIsShowStatus(typeStatus, 1);
+  changeEditorIsShowStatus(typeStatus, 0);
   return status;
 };

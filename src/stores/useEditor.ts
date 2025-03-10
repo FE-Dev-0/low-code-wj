@@ -53,11 +53,11 @@ export const useEditor = defineStore('editorStore', {
     },
     // 删除
     removeCom(index: number) {
-      this.coms.splice(index, 1);
       // 删除的时候要看删除的是不是问卷题目
       if (isSurveyComName(this.coms[index].name)) {
         this.surveyCount--;
       }
+      this.coms.splice(index, 1);
     },
   },
 });

@@ -6,8 +6,6 @@ import type { ComponentMap } from '@/types';
 import SingleSelect from '@/components/SurveyComs/Materials/SelectComs/SingleSelect.vue';
 import TextNote from '@/components/SurveyComs/Materials/NoteComs/TextNote.vue';
 
-console.log('utils < SingleSelect');
-
 // 引入编辑组件
 import TitleEditor from '@/components/SurveyComs/EditItems/TitleEditor.vue';
 import DescEditor from '@/components/SurveyComs/EditItems/DescEditor.vue';

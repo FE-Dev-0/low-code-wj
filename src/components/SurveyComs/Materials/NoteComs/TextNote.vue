@@ -39,7 +39,6 @@ const props = defineProps<{
 }>();
 
 const computedState = computed(() => {
-  console.log(props);
   return {
     title: getTextStatus(props.status.title),
     desc: getTextStatus(props.status.desc),
