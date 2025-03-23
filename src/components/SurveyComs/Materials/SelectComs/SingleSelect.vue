@@ -11,7 +11,7 @@
       :desc-color="computedState.descColor"
     />
     <div class="radio-group">
-      <ElRadioGroup>
+      <ElRadioGroup v-model="radioValue" @click.stop @change="emitAnswer">
         <ElRadio v-for="(item, index) in computedState.options" :value="item" :key="index">{{
           item
         }}</ElRadio>
@@ -29,15 +29,23 @@ import {
   getTextStatus,
 } from '@/utils';
 
-console.log('SingleSelect < utils');
-
 import { ElRadio, ElRadioGroup } from 'element-plus';
-import { computed } from 'vue';
+import { computed, ref } from 'vue';
 
 const props = defineProps<{
   status: OptionsStatus;
   serialNum: number;
 }>();
+
+const radioValue = ref('');
+
+// 回头父组件需要传递一个updateAnswer过来
+// 通过触发父组件的这个自定义事件将答案传递给父组件
+const emits = defineEmits(['updateAnswer']);
+
+const emitAnswer = () => {
+  emits('updateAnswer', radioValue.value);
+};
 
 const computedState = computed(() => {
   return {

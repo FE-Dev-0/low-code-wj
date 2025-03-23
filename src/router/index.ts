@@ -66,13 +66,23 @@ const router = createRouter({
         },
       ],
     },
+    {
+      path: '/preview/:id(\\d+)',
+      name: 'preview',
+      component: () => import('@/views/Preview.vue'),
+    },
+    {
+      path: '/quiz/:id',
+      name: 'quiz',
+      component: () => import('@/views/QuizView.vue'),
+    },
   ],
 });
 
 router.beforeEach((to, from, next) => {
-  const { matched } = to;
+  const activeView = localStorage.getItem('activeView');
   const store = useMaterialStore();
-  if (matched.find((el) => el.name === 'materials' && to.name)) {
+  if (activeView === 'materials' && to.name) {
     store.setCurrentMaterialCom(to.name as string);
   }
   next();

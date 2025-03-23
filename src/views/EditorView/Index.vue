@@ -5,7 +5,7 @@
       <ElAside style="width: 350px">
         <LeftSide />
       </ElAside>
-      <ElMain style="padding: 0; background-color: var(--white)" class="ml-20 mr-20">
+      <ElMain class="main-container">
         <Center></Center>
       </ElMain>
       <ElAside style="width: 350px">
@@ -100,5 +100,13 @@ provide('updateStatus', updateStatus);
   padding: 20px;
   height: calc(100vh - 40px - 50px);
   background: url('@/assets/imgs/editor_background.png');
+}
+.main-container {
+  margin: 0 20px;
+  border: 1px solid var(--border-color);
+  height: 100%;
+  box-sizing: border-box;
+  border-radius: var(--border-radius-base);
+  background-color: var(--white);
 }
 </style>

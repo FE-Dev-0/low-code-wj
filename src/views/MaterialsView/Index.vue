@@ -1,5 +1,5 @@
 <template>
-  <Header></Header>
+  <Header :isEditor="false"></Header>
   <ElContainer class="container">
     <ElAside width="70px" style="padding: 0">
       <div class="category" accordion @change="handleCategoryChange">
@@ -34,6 +34,7 @@ import {
   isTextProps,
   isTypeStatus,
 } from '@/utils';
+console.log(33434);
 import { CircleCheck } from '@element-plus/icons-vue';
 import { ElAside, ElContainer, ElIcon } from 'element-plus';
 import { computed, provide } from 'vue';

@@ -18,6 +18,7 @@ specifiers:
   element-plus: ^2.9.0
   eslint: ^9.14.0
   eslint-plugin-vue: ^9.30.0
+  mitt: ^3.0.1
   npm-run-all2: ^7.0.1
   pinia: ^2.2.6
   prettier: ^3.3.3
@@ -30,7 +31,7 @@ specifiers:
   vue: ^3.5.13
   vue-router: ^4.4.5
   vue-tsc: ^2.1.10
-  vuedraggable: ^4.1.0
+  vuedraggable: ^4.0.0
 
 dependencies:
   '@element-plus/icons-vue': 2.3.1_vue@3.5.13
@@ -41,6 +42,7 @@ dependencies:
   '@fortawesome/vue-fontawesome': 3.0.8_ea4crmqqpyqvagbzcpuilou44e
   dexie: 4.0.11
   element-plus: 2.9.5_vue@3.5.13
+  mitt: 3.0.1
   pinia: 2.3.1_egv2ww6vjuchfsqp7qchczie5e
   uuid: 11.1.0
   vue: 3.5.13_typescript@5.6.3
@@ -2386,7 +2388,6 @@ packages:
 
   /mitt/3.0.1:
     resolution: {integrity: sha512-vKivATfr97l2/QBCYAkXYDbrIWPM2IIKEl7YPhjCvKlG3kE2gm+uBo6nEXK3M5/Ffh/FLpKExzOQ3JJoJGFKBw==}
-    dev: true
 
   /mrmime/2.0.1:
     resolution: {integrity: sha512-Y3wQdFg2Va6etvQ5I82yUhGdsKrcYox6p7FfL1LbK2J4V01F9TGlepTIhnK24t7koZibmg82KGglhA1XK5IsLQ==}

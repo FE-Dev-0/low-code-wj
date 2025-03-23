@@ -7,3 +7,7 @@ export interface SurveyDBData {
   surveyCount: number;
   coms: ComStatus[];
 }
+
+export interface SurveyDBReturnData extends SurveyDBData {
+  id: number;
+}

@@ -43,3 +43,21 @@ export const SurveyComNameArr = ['single-select'];
 export function isSurveyComName(value: string): value is SurveyComName {
   return SurveyComNameArr.includes(value as SurveyComName);
 }
+
+// 该数组记录适合生成PDF的题目类型
+const PDFComs = [
+  'single-select',
+  'single-pic-select',
+  'personal-info-gender',
+  'personal-info-education',
+  'text-note',
+];
+
+export function canUsedForPDF(value: string): boolean {
+  return PDFComs.includes(value);
+}
+
+export type QuizData = {
+  surveyCount: number;
+  coms: ComStatus[];
+};

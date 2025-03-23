@@ -1,5 +1,5 @@
 <template>
-  <div class="center-container">
+  <div class="center-container" ref="centerContainer">
     <draggable v-model="store.coms" item-key="index" @start="dragstart">
       <template #item="{ element, index }">
         <div
@@ -9,6 +9,7 @@
           :class="{
             active: store.currentComIndex === index,
           }"
+          :ref="(el) => (componentsRefs[index] = el)"
         >
           <component :is="element.type" :status="element.status"></component>
           <!-- 删除按钮 -->
@@ -33,6 +34,8 @@ import { Close } from '@element-plus/icons-vue';
 import { ElButton, ElMessage, ElMessageBox } from 'element-plus';
 import draggable from 'vuedraggable';
 import { useEditor } from '@/stores/useEditor';
+import { nextTick, ref, type ComponentPublicInstance } from 'vue';
+import eventBus from '@/utils/eventBus';
 const store = useEditor();
 
 const clickHandle = (index: number) => {
@@ -63,16 +66,42 @@ const removeCom = (index: number) => {
 const dragstart = () => {
   store.setCurrentComponentIndex(-1);
 };
+
+const centerContainer = ref<HTMLElement | null>(null);
+
+// 滚到底部
+const scorllToBottom = () => {
+  nextTick(() => {
+    const container = centerContainer.value; // 获取容器的dom元素
+    if (container) {
+      const contentHeight = container.scrollHeight;
+      if (!container.parentElement) return;
+      container.parentElement.scrollTop = contentHeight;
+    }
+  });
+};
+
+const componentsRefs = ref<(Element | ComponentPublicInstance | null)[]>([]);
+// 将某个题目滚动到视口中间
+const scrollToCenter = (index: number) => {
+  nextTick(() => {
+    const element = componentsRefs.value[index]; // 获取当前题目的dom元素
+    // 判断当前元素是否是HTMLElement
+    if (element instanceof HTMLElement) {
+      element.scrollIntoView({
+        behavior: 'smooth',
+        block: 'center',
+      });
+    }
+  });
+};
+
+eventBus.on('scrollToBottom', scorllToBottom);
+eventBus.on('scrollToCenter', scrollToCenter);
 </script>
 
 <style scoped lang="scss">
 .center-container {
-  border: 1px solid var(--border-color);
-  height: 100%;
-  box-sizing: border-box;
-  border-radius: var(--border-radius-base);
-  padding: 20px;
-  background-color: var(--white);
   .content {
     padding: 10px;
     background-color: var(--white);

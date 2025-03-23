@@ -15,7 +15,11 @@
             <ElButton size="small" type="success" @click="saveSurvey">保存问卷</ElButton>
           </span>
         </div>
+        <div v-if="id">
+          <el-button type="primary" size="small" @click="preview">预览</el-button>
+        </div>
       </div>
+
       <div class="right flex justify-content-center align-items-center">
         <el-avatar :size="30" :src="avatar" />
       </div>
@@ -44,6 +48,7 @@ const props = defineProps({
 });
 
 const goHome = () => {
+  localStorage.setItem('activeView', 'home');
   router.push('/');
 };
 
@@ -103,6 +108,24 @@ const saveSurvey = () => {
     })
     .catch(() => {
       ElMessage.info('已取消保存');
+    });
+};
+
+const preview = () => {
+  ElMessageBox.confirm('预览会自动保存问卷，是否跳转预览？', '提示', {
+    confirmButtonText: '确定',
+    cancelButtonText: '取消',
+    type: 'info',
+  })
+    .then(() => {
+      updateSurvey();
+      router.push({
+        path: `/preview/${props.id}`,
+        state: { from: 'editor' },
+      });
+    })
+    .catch(() => {
+      ElMessage.info('已取消跳转');
     });
 };
 
